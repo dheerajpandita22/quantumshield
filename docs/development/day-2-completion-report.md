@@ -1,9 +1,9 @@
 # QuantumShield — Day 2 Completion Report
 
-**Date:** 2026-11-10  
+**Date:** 2026-11-15 (updated)  
 **Author:** Lead Full-Stack & Quantum Engineer (Antigravity)  
 **Location:** `d:\QuantumShield`  
-**Status:** DAY 2 COMPLETE
+**Status:** DAY 2 FULLY COMPLETE ✅
 
 ---
 
@@ -88,18 +88,23 @@ Live testing verified the FastAPI server and health endpoints responding with HT
 | `pytest -v` | `d:\QuantumShield` | 0 | **28 passed in 1.95s** (22 quantum tests, 6 API health tests) |
 | Live Uvicorn startup & loopback query | `d:\QuantumShield` | 0 | `GET /health` returned HTTP 200 `{'status': 'ok', 'version': '0.1.0'}`; `GET /api/v1/health` returned HTTP 200; `GET /api/v1/quantum/backends` returned HTTP 200 with 3 backends |
 | `python -m backend.quantum_engine.demo` | `d:\QuantumShield` | 0 | All RY states passed, all 4 Bell states verified, all 5 teleportation states passed statistical tolerances |
-| `npm ping` | Host | 0 | `PONG 1546ms` |
-| `npm install` in `apps/defender-web` | `apps/defender-web` | 1 | Failed due to network connection reset (`ECONNRESET`) downloading large `@next/swc-win32-x64-msvc` binary package over current high-latency connection. (Details below in Section 5) |
+| `npm ping` | Host | 0 | `PONG 684ms` |
+| `npm install` in `apps/defender-web` | `apps/defender-web` | 0 | ✅ 370 packages installed (323 top-level), deprecation warnings only |
+| `npm install` in `apps/attack-lab-web` | `apps/attack-lab-web` | 0 | ✅ 370 packages installed (323 top-level), deprecation warnings only |
+| `next build` in `apps/defender-web` | `apps/defender-web` | 0 | ✅ Compiled successfully, 9/9 static pages generated (/, /events, /incidents, /quantum, /reports, /settings), First Load JS ~112 kB |
+| `next build` in `apps/attack-lab-web` | `apps/attack-lab-web` | 0 | ✅ Compiled successfully, 9/9 static pages generated (/, /batch, /history, /results, /scenarios, /simulate), First Load JS ~112 kB |
+| `pytest -v` (re-verification) | `d:\QuantumShield` | 0 | **28 passed in 4.52s** |
 
 ---
 
-## 5. Known Blockers and Unresolved Questions
+## 5. Known Issues and Notes
 
-1. **Host NPM Network Connectivity (`ECONNRESET`):**
-   - *Observation:* Running `npm install` for Next.js 15 encountered intermittent TCP stream read resets (`ECONNRESET`) when fetching the 40+ MB native compiler binary `@next/swc-win32-x64-msvc`.
-   - *Status:* Frontend package files, configs, and TypeScript source structures are complete and valid.
-   - *Next Corrective Action:* Re-run `npm install` when network connectivity to `registry.npmjs.org` stabilizes, or pre-populate local npm cache / use an internal npm mirror.
-2. **GitHub Remote Publishing:**
+1. **Next.js Version (15.0.3) — Security Advisory:**
+   - Next.js 15.0.3 has a published CVE (CVE-2025-66478). Recommend upgrading to latest patched version when beginning active frontend development in Day 3.
+   - *Impact:* Low risk during local development; must be resolved before any deployment.
+2. **npm Deprecation Warnings:**
+   - `inflight`, `rimraf@3`, `glob@7`, `eslint@8`, `@humanwhocodes/*` packages have deprecation warnings. These are transitive dependencies from `eslint-config-next` and do not affect functionality.
+3. **GitHub Remote Publishing:**
    - *Status:* Local Git repository is initialized and committed. Pushing to GitHub requires remote credentials (SSH key or personal access token) for user `dheerajpandita22`.
 
 ---
@@ -108,7 +113,7 @@ Live testing verified the FastAPI server and health endpoints responding with HT
 
 - **Repository Path:** `d:\QuantumShield`
 - **Initial Branch:** `main`
-- **Commit Hash:** `7a9b093952f4b4efefae8cb7863cb3f1013470bf`
+- **Commit Hash:** `1c36436645cf03cd30254fea7e09c56166d38d47`
 - **Commit Message:** `feat(day2): establish QuantumShield monorepo foundation, backend API, quantum engine, and docs`
 - **Files Committed:** 87 files changed, 9,647 insertions.
 
